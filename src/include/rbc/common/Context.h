@@ -57,7 +57,8 @@ public:
 
         cacher = new BlockCacher(config->configValues["DataStoreDev"],
                                  stoull(config->configValues["cache_total_size"]));
-        metastore = new MetaStore();
+        //TODO use different metastore prefixed with volume_name?
+        metastore = new MetaStore(config->configValues["MetaStoreDir"]);
         log_print( "backendstore construction start\n");
         backendstore = new BackendStore("rbcclient");
         log_print( "backendstore construction finish\n");

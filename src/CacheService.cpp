@@ -250,7 +250,7 @@ int CacheService::read_hit( CacheEntry* cache_entry, const char* data_oid, uint6
 int CacheService::write_miss( CacheEntry* cache_entry, const char* oid, const char* data_oid, uint64_t offset, uint64_t length, const char* data ){
     int ret = datastore_update( data_oid, offset, length, data );
     if( ret == 0 ){
-        //ret = metastore_update( oid, data_oid );
+        ret = metastore_update( oid, data_oid );
         cache_entry->data_map_update( offset % this->cct->object_size, length );
     }
     return ret;
@@ -261,7 +261,7 @@ int CacheService::read_miss( CacheEntry* cache_entry, const char* oid, const cha
     int ret = backstore_get( op, data );
     ret = datastore_update( data_oid, offset, length, data );
     if( ret == 0 ){
-        //ret = metastore_update( oid, data_oid );
+        ret = metastore_update( oid, data_oid );
         cache_entry->data_map_update( offset % this->cct->object_size, length );
     }
     return ret;

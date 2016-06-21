@@ -2,17 +2,16 @@
 
 using namespace rocksdb;
 
-std::string kDBPath = "/tmp/rocksdb_simple_example";
 
 namespace rbc {
-MetaStore::MetaStore()
+MetaStore::MetaStore(std::string dbpath)
 {
   // Optimize RocksDB. This is the easiest way to get RocksDB to perform well
   options.IncreaseParallelism();
   options.OptimizeLevelStyleCompaction();
   // create the DB if it's not already present
   options.create_if_missing = true;
-  Status s = DB::Open(options, kDBPath, &db);
+  Status s = DB::Open(options, dbpath, &db);
   if (!s.ok())
   {
     return;

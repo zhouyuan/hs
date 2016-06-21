@@ -13,7 +13,7 @@ namespace rbc {
 class MetaStore {
 
 public:
-  MetaStore();
+  MetaStore(std::string dbpath);
   ~MetaStore();
 
   int get(const char* oid, char* data);
